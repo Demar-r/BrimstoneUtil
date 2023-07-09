@@ -8,9 +8,87 @@
 <body>
     <h1>MyUtil</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident commodi veniam dolore adipisci blanditiis saepe sequi, hic soluta ab. Libero at officiis numquam voluptatibus consectetur asperiores quaerat, quo sunt facere!</p>
-    <button class="continue">Test</button>
+    <button id="randomLocation">Select Random Location</button>
+    <button id="clearButton">Clear List</button>
+    <ul id="locationList"></ul>
+
     <script>
-        $( "button.continue" ).html( "Next Step..." );
+        var locations = [
+         { selected: false, game: 'City of the Anchients', location: 'Docs Office'}
+        ,{ selected: false, game: 'City of the Anchients', location: 'Blacksmith'}
+        ,{ selected: false, game: 'City of the Anchients', location: 'Saloon'}
+        ,{ selected: false, game: 'City of the Anchients', location: 'Frontier Outpost'}
+        ,{ selected: false, game: 'City of the Anchients', location: 'Church'}
+        ,{ selected: false, game: 'City of the Anchients', location: 'General Store'}
+
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'House of Healing'}
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'Swordsmith'}
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'Tavern'}
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'Guard House'}
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'Shrine'}
+        ,{ selected: false, game: 'Forbidden Fortress', location: 'Village Market'}
+
+        ,{ selected: false, game: 'Frontier Town', location: 'Street Market'}
+        ,{ selected: false, game: 'Frontier Town', location: 'Sheriffs Office'}
+        ,{ selected: false, game: 'Frontier Town', location: 'Indian Trading Post'}
+        ,{ selected: false, game: 'Frontier Town', location: 'Smugglers Den'}
+        ,{ selected: false, game: 'Frontier Town', location: 'Mutant Quarter'}
+        ];
+        
+        function selectRecordAndWriteToList() {
+            // Get a random location
+            var selectedRecord = getUnselectedLocation();
+
+            // Stop is no record selected
+            if (selectedRecord == null) {
+                return;
+            }
+
+            // Set record as selected
+            selectedRecord.selected = true;
+
+            // Get the <ul> element in the HTML where the list will be written
+            var listElement = document.getElementById('locationList');
+
+            // Create a new <li> element
+            var listItem = document.createElement('li');
+
+            // Set the inner HTML of the <li> element to display the selected record
+            listItem.innerHTML = selectedRecord.location + ' from ' + selectedRecord.game;
+
+            // Append the <li> element to the <ul> element
+            listElement.appendChild(listItem);
+        }
+
+        function clearLocationList() {
+            $('#locationList').empty();
+            for (var i = 0; i < locations.length; i++) {
+                locations[i].selected = false;
+            }
+        }
+
+        // Generate a random number between min (inclusive) and max (exclusive)
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        }
+
+        function getUnselectedLocation() {
+            var availableLocations = locations.filter(function(x) { return !x.selected; });
+            var selectedRecord;
+            if (availableLocations.length > 0) {
+                var index = getRandomNumber(0, availableLocations.length - 1)
+                selectedRecord = availableLocations[index];
+            }
+            return selectedRecord;
+        }
+
+        $('randomLocation').on('click', function() {
+            selectRecordAndWriteToList();
+        });
+
+        $('#clearButton').on('click', function() {
+            clearLocationList();
+        });
     </script>
 </body>
 </html>

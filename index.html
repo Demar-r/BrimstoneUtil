@@ -2,12 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Brimstone Utility</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha384-NXgwF8Kv9SSAr+jemKKcbvQsz+teULH/a5UNJvZc6kP47hZgl62M1vGnw6gHQhb1" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>MyUtil</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident commodi veniam dolore adipisci blanditiis saepe sequi, hic soluta ab. Libero at officiis numquam voluptatibus consectetur asperiores quaerat, quo sunt facere!</p>
+    <h1>Random Location Selector</h1>
     <button id="randomLocation">Select Random Location</button>
     <button id="clearButton">Clear List</button>
     <ul id="locationList"></ul>
@@ -54,7 +53,7 @@
             var listItem = document.createElement('li');
 
             // Set the inner HTML of the <li> element to display the selected record
-            listItem.innerHTML = selectedRecord.location + ' from ' + selectedRecord.game;
+            listItem.innerHTML = selectedRecord.location;// + ' from ' + selectedRecord.game;
 
             // Append the <li> element to the <ul> element
             listElement.appendChild(listItem);
